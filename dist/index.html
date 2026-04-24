@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>NoLow | Boost Your Mood</title>
+    <meta name="description" content="Your personal mood & habit tracker. Add activities, track daily habits, and get random mood-boosting suggestions." />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#8b5cf6" />
+
+    <!-- iOS Specific Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="NoLow" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- iOS Splash Screens -->
+    <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="/icon-512.png" />
+    <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" href="/icon-512.png" />
+    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" href="/icon-512.png" />
+    <link rel="apple-touch-startup-image" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" href="/icon-512.png" />
+    <link rel="apple-touch-startup-image" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)" href="/icon-512.png" />
+    <link rel="apple-touch-startup-image" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)" href="/icon-512.png" />
+
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/assets/index-DSOSr3FV.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-klAwcEBx.css">
+  </head>
+  <body>
+    <!-- Background Animated Shapes -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+
+    <main class="app-container">
+      <header>
+        <h1 class="gradient-text">NoLow</h1>
+        <p class="subtitle">Your personal mood & habit tracker.</p>
+      </header>
+
+      <!-- Navigation Tabs -->
+      <nav class="tabs-nav">
+        <button class="tab-btn active" data-target="tab-boost">Boost Mood</button>
+        <button class="tab-btn" data-target="tab-habits">Daily Habits</button>
+        <button class="tab-btn" data-target="tab-reports">Reports</button>
+      </nav>
+
+      <!-- TAB 1: BOOST MOOD -->
+      <div id="tab-boost" class="tab-content active">
+        <section class="activity-input-section">
+          <div class="input-wrapper">
+            <input type="text" id="activity-input" placeholder="e.g. Go for a walk..." aria-label="Add a new activity" />
+            <button id="add-btn" class="btn-primary" aria-label="Add Activity">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+          </div>
+        </section>
+
+        <section class="activities-list-section">
+          <ul id="activities-list" class="activities-list"></ul>
+          <div id="empty-state" class="empty-state">
+            <p>No activities yet. Add things you enjoy doing!</p>
+          </div>
+        </section>
+
+        <div class="action-section">
+          <button id="feeling-low-btn" class="btn-glow">
+            <span class="btn-glow-content">I'm Feeling Low</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 2: DAILY HABITS -->
+      <div id="tab-habits" class="tab-content">
+        <div class="date-header">
+          <h3 id="current-date-display">Today</h3>
+        </div>
+        <section class="activity-input-section">
+          <div class="input-wrapper">
+            <input type="text" id="habit-input" placeholder="e.g. Drink 2L Water" aria-label="Add a new habit" />
+            <button id="add-habit-btn" class="btn-primary" aria-label="Add Habit">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+          </div>
+        </section>
+
+        <section class="activities-list-section">
+          <ul id="habits-list" class="activities-list"></ul>
+          <div id="habit-empty-state" class="empty-state">
+            <p>No daily habits set. Add some routine tasks!</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- TAB 3: REPORTS -->
+      <div id="tab-reports" class="tab-content">
+        <h3 class="report-title">Last 7 Days Progress</h3>
+        <div class="chart-container" id="report-chart"></div>
+      </div>
+
+    </main>
+
+    <!-- Suggestion Modal -->
+    <div id="suggestion-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content glass-panel">
+        <button id="close-modal-btn" class="close-btn" aria-label="Close Modal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <h2>Why don't you try...</h2>
+        <div class="suggestion-highlight">
+          <p id="suggested-activity-text">Activity Name Here</p>
+        </div>
+        <div class="modal-actions">
+          <button id="do-it-btn" class="btn-primary">I'll do it!</button>
+          <button id="another-btn" class="btn-secondary">Pick Another</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((reg) => console.log('SW registered:', reg.scope))
+            .catch((err) => console.log('SW registration failed:', err));
+        });
+      }
+
+      // iOS Install Prompt
+      window.addEventListener('load', () => {
+        const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+        const isStandalone = window.navigator.standalone === true;
+        const dismissed = sessionStorage.getItem('nolow_install_dismissed');
+
+        if (isIOS && !isStandalone && !dismissed) {
+          const banner = document.createElement('div');
+          banner.id = 'ios-install-banner';
+          banner.innerHTML = `
+            <div style="
+              position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+              background: rgba(20, 25, 40, 0.95); backdrop-filter: blur(20px);
+              -webkit-backdrop-filter: blur(20px);
+              border-top: 1px solid rgba(255,255,255,0.15);
+              padding: 1rem 1.25rem; padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+              display: flex; align-items: center; gap: 1rem;
+              animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+              font-family: 'Outfit', sans-serif;
+            ">
+              <img src="/apple-touch-icon.png" style="width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;" alt="NoLow" />
+              <div style="flex: 1; min-width: 0;">
+                <div style="color: #fff; font-weight: 600; font-size: 0.95rem;">Install NoLow</div>
+                <div style="color: #94a3b8; font-size: 0.8rem; margin-top: 2px;">
+                  Tap <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> then <strong style="color: #fff;">Add to Home Screen</strong>
+                </div>
+              </div>
+              <button id="close-install-banner" style="
+                background: rgba(255,255,255,0.1); border: none; color: #94a3b8;
+                width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+                display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+                font-size: 1.2rem;
+              ">&times;</button>
+            </div>
+          `;
+          document.body.appendChild(banner);
+
+          document.getElementById('close-install-banner').addEventListener('click', () => {
+            banner.remove();
+            sessionStorage.setItem('nolow_install_dismissed', 'true');
+          });
+        }
+      });
+    </script>
+
+    <style>
+      @keyframes slideUp {
+        from { transform: translateY(100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+    </style>
+  </body>
+</html>
